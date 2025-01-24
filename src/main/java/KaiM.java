@@ -5,7 +5,6 @@ import java.io.*;
 
 class KaiM {
     
-    
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out, true);
@@ -18,6 +17,7 @@ class KaiM {
 
         while(taskCount < 100) {
             String task = br.readLine();
+
             try {
                 if (task.equals(null)){
                     continue;
@@ -49,6 +49,9 @@ class KaiM {
 
                 } else if (task.split(" ")[0].equals("delete")) {
                     int taskNumber = Integer.parseInt(task.split(" ")[1]) - 1;
+                    if (taskNumber > tasks.size() - 1) {
+                        throw new KaiMException("Incorrect input cannot delete task");
+                    }
                     Task removedTask = tasks.remove(taskNumber);
                     pw.println(" Noted. I've removed this task:");
                     pw.println("   " + removedTask);
@@ -73,7 +76,6 @@ class KaiM {
                     pw.println("   " + tasks.get(taskCount));
                     taskCount++;
                     pw.println(" Now you have " + taskCount + " tasks in the list.");
-                    
 
                 } else if (task.split(" ")[0].equals("event")) {
                     String[] parts = task.split("/from");
