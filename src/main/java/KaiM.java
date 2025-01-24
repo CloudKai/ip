@@ -1,3 +1,4 @@
+
 import java.util.*;
 import java.io.*;
 
@@ -17,6 +18,10 @@ class KaiM {
 
         while(taskCount < 100) {
             String task = br.readLine();
+
+            if (task.equals(null)){
+                continue;
+            }
 
             if(task.equals("bye")) {
                 pw.println(" Bye. Hope to see you again soon!");
