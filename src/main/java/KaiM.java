@@ -1,34 +1,9 @@
 import java.util.*;
 import java.io.*;
 
+
 class KaiM {
-
-    public static class Task {
-        protected String description;
-        protected boolean isDone;
     
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-    
-        public String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
-        }
-    
-        public void markAsDone() {
-            this.isDone = true;
-        }
-    
-        public void markAsNotDone() {
-            this.isDone = false;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + getStatusIcon() + "] " + description;
-        }
-    }
     
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -63,6 +38,34 @@ class KaiM {
                 tasks[taskNumber].markAsNotDone();
                 pw.println(" OK, I've marked this task as not done yet:");
                 pw.println("   " + tasks[taskNumber]);
+            
+            } else if (task.split(" ")[0].equals("todo")) {
+                String[] taskDescription = task.split("todo");
+                tasks[taskCount] = new Todo(taskDescription[1].trim());
+                pw.println(" Got it. I've added this task:");
+                pw.println("   " + tasks[taskCount]);
+                taskCount++;
+                pw.println(" Now you have " + taskCount + " tasks in the list.");
+                
+            } else if (task.split(" ")[0].equals("deadline")) {
+                String[] parts = task.split("/by");
+                String[] taskDescription = parts[0].split("deadline");
+                tasks[taskCount] = new Deadline(taskDescription[1].trim(), parts[1].trim());
+                pw.println(" Got it. I've added this task:");
+                pw.println("   " + tasks[taskCount]);
+                taskCount++;
+                pw.println(" Now you have " + taskCount + " tasks in the list.");
+                
+
+            } else if (task.split(" ")[0].equals("event")) {
+                String[] parts = task.split("/from");
+                String[] taskDescription = parts[0].split("event");
+                String[] taskTime = parts[1].split("/to");
+                tasks[taskCount] = new Event(taskDescription[1].trim(), taskTime[0].trim(), taskTime[1].trim());
+                pw.println(" Got it. I've added this task:");
+                pw.println("   " + tasks[taskCount]);
+                taskCount++;
+                pw.println(" Now you have " + taskCount + " tasks in the list.");
 
             } else {
                 tasks[taskCount] = new Task(task);
