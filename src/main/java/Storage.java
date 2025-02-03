@@ -1,50 +1,43 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
+    private String filePath;
 
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private String FILE_PATH;
-    
-    public Storage(String location) {
-        this.FILE_PATH = location;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
-    
-    // Load tasks from the file
-    public void loadTasks() {
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(FILE_PATH))) {
+
+    public ArrayList<Task> loadTasks() throws KaiMException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            if (!Files.exists(Paths.get(filePath))) {
+                Files.createDirectories(Paths.get(filePath).getParent());
+                Files.createFile(Paths.get(filePath));
+            }
+
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line;
-            while ((line = fileReader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 tasks.add(Task.fromString(line));
             }
+            br.close();
         } catch (IOException e) {
-            System.out.println("Error loading tasks: " + e.getMessage());
+            throw new KaiMException("Error reading tasks from file.");
         }
+        return tasks;
     }
 
-    // Save tasks to the file
-    public void saveTasks() {
-        try {
-            Files.createDirectories(Paths.get("data"));
-
-            try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(FILE_PATH))) {
-                for (Task task : tasks) {
-                    fileWriter.write(task.toString());
-                    fileWriter.newLine();
-                }
+    public void saveTasks(TaskList tasks) throws KaiMException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (Task task : tasks.getAllTasks()) {
+                bw.write(task.toString());
+                bw.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error saving tasks: " + e.getMessage());
+            throw new KaiMException("Error saving tasks to file.");
         }
-    }
-
-    public ArrayList<Task> getTasks() {
-        return tasks;
     }
 }
