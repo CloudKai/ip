@@ -1,7 +1,13 @@
+package kaim.storage;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import kaim.task.TaskList;
+import kaim.task.Task;
+
+import kaim.KaiMException;
 
 public class Storage {
     private String filePath;

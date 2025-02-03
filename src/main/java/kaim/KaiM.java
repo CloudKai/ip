@@ -1,3 +1,10 @@
+package kaim;
+
+import kaim.task.TaskList;
+import kaim.command.Parser;
+import kaim.storage.Storage;
+import kaim.ui.Ui;
+
 public class KaiM {
     
     private Storage storage;

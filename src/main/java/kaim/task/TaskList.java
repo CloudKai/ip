@@ -1,3 +1,6 @@
+package kaim.task;
+
+import kaim.KaiMException;
 import java.util.ArrayList;
 
 public class TaskList {

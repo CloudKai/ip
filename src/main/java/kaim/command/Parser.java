@@ -1,3 +1,13 @@
+package kaim.command;
+
+import kaim.task.Deadline;
+import kaim.task.Event;
+import kaim.task.Task;
+import kaim.task.TaskList;
+import kaim.task.Todo;
+import kaim.KaiMException;
+
+
 public class Parser {
     public boolean isExitCommand(String command) {
         return command.equalsIgnoreCase("bye");
