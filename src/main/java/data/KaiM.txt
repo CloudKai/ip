@@ -1,2 +1,4 @@
 [ ] throw trash
 [D][ ] return book (by: Dec 02 2019, 6:00pm)
+[T][ ] throw trash
+[E][ ] throw (from: Mon 2pm to: 6pm)
