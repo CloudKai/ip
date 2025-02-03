@@ -1,51 +1,18 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
 class KaiM {
-
-    private static final String FILE_PATH = "data/KaiM.txt"; 
-    private static final ArrayList<Task> tasks = new ArrayList<>();
-
-    // Load tasks from the file
-    private static void loadTasks() {
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line;
-            while ((line = fileReader.readLine()) != null) {
-                tasks.add(Task.fromString(line));
-            }
-        } catch (IOException e) {
-            System.out.println("Error loading tasks: " + e.getMessage());
-        }
-    }
-
-    // Save tasks to the file
-    private static void saveTasks() {
-        try {
-            Files.createDirectories(Paths.get("data"));
-
-            try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(FILE_PATH))) {
-                for (Task task : tasks) {
-                    fileWriter.write(task.toString());
-                    fileWriter.newLine();
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving tasks: " + e.getMessage());
-        }
-    }
     
     // Main
     public static void main(String[] args) throws Exception {
-        loadTasks();
+
+        Storage sr = new Storage("data/KaiM.txt");
+        sr.loadTasks();
+        ArrayList<Task> tasks = sr.getTasks();
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out, true);
 
@@ -132,7 +99,7 @@ class KaiM {
             } catch (KaiMException e) {
                 pw.println(e.getMessage());
             }
-            saveTasks();
+            sr.saveTasks();
         }
         pw.close();
     }
