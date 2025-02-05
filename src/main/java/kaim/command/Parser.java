@@ -36,21 +36,21 @@ public class Parser {
         String action = parts[0];
 
         switch (action) {
-            case "list":
-                return listTasks(tasks);
-            case "todo":
-                return addTodo(parts, tasks);
-            case "deadline":
-                return addDeadline(parts, tasks);
-            case "event":
-                return addEvent(parts, tasks);
-            case "mark":
-            case "unmark":
-                return toggleTaskStatus(parts, tasks, action.equals("mark"));
-            case "delete":
-                return deleteTask(parts, tasks);
-            default:
-                throw new KaiMException("Unknown command.");
+        case "list":
+            return listTasks(tasks);
+        case "todo":
+            return addTodo(parts, tasks);
+        case "deadline":
+            return addDeadline(parts, tasks);
+        case "event":
+            return addEvent(parts, tasks);
+        case "mark":
+        case "unmark":
+            return toggleTaskStatus(parts, tasks, action.equals("mark"));
+        case "delete":
+            return deleteTask(parts, tasks);
+        default:
+            throw new KaiMException("Unknown command.");
         }
     }
 

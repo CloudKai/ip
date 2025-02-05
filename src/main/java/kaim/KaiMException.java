@@ -8,7 +8,7 @@ package kaim;
 public class KaiMException extends Exception {
     
     /**
-     * In progress
+     * Working in progress
      * Constructs a new KaiMException with the specified detail message.
      * 
      * @param message The error message describing the exception.
