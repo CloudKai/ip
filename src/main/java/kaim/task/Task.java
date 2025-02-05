@@ -38,7 +38,6 @@ public class Task {
         } else if (taskString.startsWith("[D]")) {
             description = taskString.substring(6).trim();
 
-            // Extract (by: Dec 02 2019, 6:00pm)
             int startIdx = description.indexOf("(by: ");
             if (startIdx == -1) {
                 throw new IllegalArgumentException("Invalid deadline format: " + taskString);
