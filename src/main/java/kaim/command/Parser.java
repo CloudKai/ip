@@ -5,6 +5,9 @@ import kaim.task.Event;
 import kaim.task.Task;
 import kaim.task.TaskList;
 import kaim.task.Todo;
+
+import java.util.ArrayList;
+
 import kaim.KaiMException;
 
 /**
@@ -49,6 +52,8 @@ public class Parser {
             return toggleTaskStatus(parts, tasks, action.equals("mark"));
         case "delete":
             return deleteTask(parts, tasks);
+        case "find":
+            return findTask(parts, tasks);
         default:
             throw new KaiMException("Unknown command.");
         }
@@ -151,5 +156,33 @@ public class Parser {
         int index = Integer.parseInt(parts[1]) - 1;
         Task removed = tasks.removeTask(index);
         return "Deleted: " + removed;
+    }
+
+    /**
+     * Finds tasks based on a keyword.
+     * 
+     * @param parts The command parts, where parts[1] is the keyword.
+     * @param tasks The task list to search in.
+     * @return A string listing the matching tasks.
+     * @throws KaiMException If the user doesn't provide a keyword.
+     */
+    private String findTask(String[] parts, TaskList tasks) throws KaiMException {
+        if (parts.length < 2) {
+            throw new KaiMException("You must provide a keyword to search.");
+        }
+        String keyword = parts[1].trim();
+        ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
+
+        if (matchingTasks.isEmpty()) {
+            return "No tasks found matching: " + keyword;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            sb.append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
+        }
+
+        return sb.toString();
     }
 }

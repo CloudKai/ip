@@ -97,4 +97,20 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Finds tasks that match the given keyword in the description.
+     * 
+     * @param keyword The keyword to search for in the task descriptions.
+     * @return A list of matching tasks.
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }
