@@ -67,7 +67,19 @@ public class KaiM {
      * 
      * @param args Command line arguments. Not used in this version of the application.
      */
+//    public static void main(String[] args) {
+//        new KaiM("data/KaiM.txt").run();
+//    }
+
     public static void main(String[] args) {
-        new KaiM("data/KaiM.txt").run();
+        System.out.println("Hello!");
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "KaiM heard: " + input;
+    }
+
 }
