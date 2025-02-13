@@ -62,15 +62,6 @@ public class KaiM {
         }
     }
 
-    /**
-     * The entry point of the application. It creates an instance of the KaiM class and runs the application.
-     * 
-     * @param args Command line arguments. Not used in this version of the application.
-     */
-//    public static void main(String[] args) {
-//        new KaiM("data/KaiM.txt").run();
-//    }
-
     public static void main(String[] args) {
         System.out.println("Hello!");
     }
@@ -79,7 +70,27 @@ public class KaiM {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "KaiM heard: " + input;
+        Parser parser = new Parser();
+        
+        try {
+            if (parser.isExitCommand(input)) {
+                return "Bye. Hope to see you again soon!";
+            }
+            String response = parser.handleCommand(input, tasks);
+            storage.saveTasks(tasks);
+            return response;
+        } catch (KaiMException e) {
+            return "Error: " + e.getMessage();
+        }
     }
 
 }
+
+    /**
+     * The entry point of the application. It creates an instance of the KaiM class and runs the application.
+     * 
+     * @param args Command line arguments. Not used in this version of the application.
+     */
+//    public static void main(String[] args) {
+//        new KaiM("data/KaiM.txt").run();
+//    }
