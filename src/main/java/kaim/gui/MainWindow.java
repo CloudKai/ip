@@ -1,3 +1,5 @@
+package kaim.gui;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import kaim.KaiM;
 
 /**
@@ -22,15 +25,15 @@ public class MainWindow extends AnchorPane {
 
     private KaiM kaiM;
 
-    private Image dogImage = new Image(this.getClass().getResourceAsStream("images/Dog.jpg"));
-    private Image catImage = new Image(this.getClass().getResourceAsStream("images/Cat.jpg"));
+    private Image dogImage = new Image(this.getClass().getResourceAsStream("/images/Dog.jpg"));
+    private Image catImage = new Image(this.getClass().getResourceAsStream("/images/Cat.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the KaiM instance */
     public void setKaim(KaiM d) {
         kaiM = d;
     }

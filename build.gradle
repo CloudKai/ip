@@ -48,11 +48,11 @@ test {
 }
 
 application {
-    mainClass.set("Launcher")
+    mainClass.set("kaim.gui.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "kaiM"
     archiveClassifier = null
     archiveFileName = 'KaiM.jar'
 }

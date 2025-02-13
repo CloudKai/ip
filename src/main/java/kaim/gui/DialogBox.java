@@ -1,3 +1,5 @@
+package kaim.gui;
+
 import java.io.IOException;
 import java.util.Collections;
 

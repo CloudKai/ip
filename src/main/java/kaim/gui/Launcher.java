@@ -1,3 +1,5 @@
+package kaim.gui;
+
 import javafx.application.Application;
 
 /**
