@@ -10,7 +10,6 @@ import java.io.PrintWriter;
  * This class handles the input and output operations between the application and the user.
  */
 public class Ui {
-    
     private BufferedReader br;
     private PrintWriter pw;
 
@@ -32,9 +31,9 @@ public class Ui {
         pw.println(" What can I do for you?");
     }
 
-     /**
+    /**
      * Reads a line of input from the user.
-     * 
+     *
      * @return The input entered by the user.
      * @throws RuntimeException If an error occurs while reading input.
      */
@@ -48,7 +47,7 @@ public class Ui {
 
     /**
      * Displays a message to the user.
-     * 
+     *
      * @param message The message to be displayed.
      */
     public void showMessage(String message) {
@@ -57,7 +56,7 @@ public class Ui {
 
     /**
      * Displays an error message to the user.
-     * 
+     *
      * @param errorMessage The error message to be displayed.
      */
     public void showError(String errorMessage) {

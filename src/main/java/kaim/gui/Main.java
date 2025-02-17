@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import kaim.KaiM;
 
 /**
@@ -15,7 +14,7 @@ import kaim.KaiM;
  */
 public class Main extends Application {
 
-    private KaiM kaiM = new KaiM("/data/KaiM.txt");
+    private KaiM kaiM = new KaiM("data/KaiM.txt");
 
     @Override
     public void start(Stage stage) {
@@ -24,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setKaim(kaiM);  // inject the KaiM instance
+            fxmlLoader.<MainWindow>getController().setKaim(kaiM); // inject the KaiM instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

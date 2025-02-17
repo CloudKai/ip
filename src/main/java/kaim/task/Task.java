@@ -62,7 +62,9 @@ public class Task {
             if (taskString.startsWith("[T]")) {
                 description = taskString.substring(6).trim();
                 Todo todo = new Todo(description);
-                if (isDone) todo.markAsDone();
+                if (isDone) {
+                    todo.markAsDone();
+                }
                 return todo;
 
             } else if (taskString.startsWith("[D]")) {
@@ -73,10 +75,13 @@ public class Task {
                     throw new IllegalArgumentException("Invalid deadline format: " + taskString);
                 }
                 String taskDesc = description.substring(0, startIdx).trim();
-                String dateTimeStr = description.substring(startIdx + 5, description.length() - 1).trim(); // Remove (by: and )
+                String dateTimeStr = description.substring(startIdx + 5, description.length() - 1)
+                                                    .trim(); // Remove (by: and )
 
                 Deadline deadline = new Deadline(taskDesc, dateTimeStr);
-                if (isDone) deadline.markAsDone();
+                if (isDone) {
+                    deadline.markAsDone();
+                }
                 return deadline;
 
             } else if (taskString.startsWith("[E]")) {
@@ -94,13 +99,17 @@ public class Task {
                 String toTimeStr = description.substring(toIdx + 5, description.length() - 1).trim(); // Remove )
 
                 Event event = new Event(taskDesc, fromTimeStr, toTimeStr);
-                if (isDone) event.markAsDone();
+                if (isDone) {
+                    event.markAsDone();
+                }
                 return event;
 
             } else {
                 description = taskString.substring(4).trim();
                 Task task = new Task(description);
-                if (isDone) task.markAsDone();
+                if (isDone) {
+                    task.markAsDone();
+                }
                 return task;
             }
         } catch (DateTimeParseException e) {
@@ -108,7 +117,7 @@ public class Task {
         } catch (Exception e) {
             throw new IllegalArgumentException("Error parsing task: " + taskString + "\n" + e.getMessage());
         }
-    }   
+    }
 
     @Override
     public String toString() {

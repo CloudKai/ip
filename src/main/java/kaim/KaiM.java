@@ -1,8 +1,8 @@
 package kaim;
 
-import kaim.task.TaskList;
 import kaim.command.Parser;
 import kaim.storage.Storage;
+import kaim.task.TaskList;
 import kaim.ui.Ui;
 
 /**
@@ -11,16 +11,15 @@ import kaim.ui.Ui;
  * The class loads tasks from a saved file, executes user commands, and saves tasks back to the file.
  */
 public class KaiM {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Initializes the KaiM instance with a specified file path. It sets up the user interface,
-     * storage, and attempts to load tasks from the specified file. If loading tasks fails, 
+     * storage, and attempts to load tasks from the specified file. If loading tasks fails,
      * a new task list is created.
-     * 
+     *
      * @param filePath The path to the file where tasks are stored.
      * @throws KaiMException If an error occurs while loading tasks from the file.
      */
@@ -39,7 +38,7 @@ public class KaiM {
      * Starts the application by continuously accepting user input and executing commands until
      * the user enters the exit command. It interacts with the user interface and the storage
      * to manage tasks.
-     * 
+     *
      * @throws KaiMException If an error occurs while handling a command or saving tasks.
      */
     public void run() {
@@ -71,7 +70,6 @@ public class KaiM {
      */
     public String getResponse(String input) {
         Parser parser = new Parser();
-        
         try {
             if (parser.isExitCommand(input)) {
                 return "Bye. Hope to see you again soon!";
@@ -86,11 +84,3 @@ public class KaiM {
 
 }
 
-    /**
-     * The entry point of the application. It creates an instance of the KaiM class and runs the application.
-     * 
-     * @param args Command line arguments. Not used in this version of the application.
-     */
-//    public static void main(String[] args) {
-//        new KaiM("data/KaiM.txt").run();
-//    }
