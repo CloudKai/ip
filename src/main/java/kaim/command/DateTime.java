@@ -7,13 +7,13 @@ import java.util.List;
 
 /**
  * Utility class for parsing and formatting dates and times in multiple formats.
- * It provides methods to parse a string into a LocalDateTime object and 
+ * It provides methods to parse a string into a LocalDateTime object and
  * format a LocalDateTime object into a (MM dd yyyy) string.
  */
 public class DateTime {
     private static final List<DateTimeFormatter> INPUT_FORMATS = List.of(
-        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),   // 2023-12-31 2359
-        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),     // 31/12/2023 2359
+        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // 2023-12-31 2359
+        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // 31/12/2023 2359
         DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma") // Dec 31 2023, 11:59PM
     );
 
