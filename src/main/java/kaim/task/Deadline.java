@@ -22,8 +22,20 @@ public class Deadline extends Task {
         this.deadlineDateTime = DateTime.parseDateTime(by);
     }
 
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTime.formatDateTime(deadlineDateTime) + ")";
-    }
+   /**
+    * Constructs a Deadline task with a description and a due date/time.
+    *
+    * @param description The description of the deadline task.
+    * @param by The due date/time in string format.
+    */
+   public Deadline(String description, String by) {
+      super(description);
+      assert description != null && !description.isEmpty() : "Description cannot be null or empty";
+      this.deadlineDateTime = DateTime.parseDateTime(by);
+   }
+
+   @Override
+   public String toString() {
+      return "[D]" + super.toString() + " (by: " + DateTime.formatDateTime(deadlineDateTime) + ")";
+   }
 }
