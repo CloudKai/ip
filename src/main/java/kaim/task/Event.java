@@ -1,6 +1,5 @@
 package kaim.task;
 
-
 /**
  * Represents an event task with a start and end date/time.
  * An Event is a type of Task that includes a specified time frame.
@@ -25,7 +24,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startDateTime 
+        return "[E]" + super.toString() + " (from: " + startDateTime
             + " to: " + endDateTime + ")";
     }
 }

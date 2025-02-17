@@ -1,5 +1,5 @@
 package kaim.command;
-
+import kaim.KaiMException;
 import kaim.task.Deadline;
 import kaim.task.Event;
 import kaim.task.Task;
@@ -8,7 +8,7 @@ import kaim.task.Todo;
 
 import java.util.ArrayList;
 
-import kaim.KaiMException;
+
 
 /**
  * This class handles parsing user input and executing the corresponding commands.
@@ -26,7 +26,7 @@ public class Parser {
         return command.equalsIgnoreCase("bye");
     }
 
-     /**
+    /**
      * Handles the command entered by the user and select the appropriate method.
      *
      * @param command The full command entered by the user.
@@ -76,7 +76,7 @@ public class Parser {
         return sb.toString();
     }
 
-     /**
+    /**
      * Adds a new Todo task to the task list.
      *
      * @param parts The command parts (description) for the todo task.
@@ -102,9 +102,9 @@ public class Parser {
      * @throws KaiMException If the deadline format is incorrect.
      */
     private String addDeadline(String[] parts, TaskList tasks) throws KaiMException {
-        String[] details = parts[1].split("/by");
+        String[] details = parts[1].split("\\s*/by\\s*");
         if (details.length < 2) {
-            throw new KaiMException("Deadline format: deadline task /by yyyy-MM-dd HHmm");
+            throw new KaiMException("Deadline format: deadline task /by dd/MM/yyy time");
         }
         Task task = new Deadline(details[0].trim(), details[1].trim());
         tasks.addTask(task);
@@ -160,7 +160,7 @@ public class Parser {
 
     /**
      * Finds tasks based on a keyword.
-     * 
+     *
      * @param parts The command parts, where parts[1] is the keyword.
      * @param tasks The task list to search in.
      * @return A string listing the matching tasks.
