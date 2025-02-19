@@ -42,9 +42,8 @@ public class KaiM {
      * @throws KaiMException If an error occurs while handling a command or saving tasks.
      */
     public void run() {
-        ui.showWelcomeMessage();
         Parser parser = new Parser();
-
+        ui.showWelcomeMessage();
         while (true) {
             String input = ui.readCommand();
             try {
@@ -73,6 +72,7 @@ public class KaiM {
         try {
             if (parser.isExitCommand(input)) {
                 return "Bye. Hope to see you again soon!";
+                // Add to quit
             }
             String response = parser.handleCommand(input, tasks);
             storage.saveTasks(tasks);

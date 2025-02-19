@@ -23,6 +23,10 @@ public class Deadline extends Task {
         this.deadlineDateTime = DateTime.parseDateTime(by);
     }
 
+    public void setDeadline(String newDeadline) {
+        this.deadlineDateTime = DateTime.parseDateTime(newDeadline);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateTime.formatDateTime(deadlineDateTime) + ")";

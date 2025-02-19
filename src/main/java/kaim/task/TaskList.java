@@ -1,8 +1,9 @@
 package kaim.task;
 
-import kaim.KaiMException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import kaim.KaiMException;
 
 /**
  * Manages a list of tasks in the KaiM application.
@@ -82,6 +83,62 @@ public class TaskList {
     }
 
     /**
+     * Updates the name/description of a task at the specified index.
+     *
+     * @param index   The index of the task to update.
+     * @param newName The new name for the task.
+     * @throws KaiMException If the index is out of bounds.
+     */
+    public void updateTaskName(int index, String newName) throws KaiMException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new KaiMException("Invalid task number.");
+        }
+        tasks.get(index).setDescription(newName);
+    }
+
+    /**
+     * Updates the deadline of a Deadline task at the specified index.
+     *
+     * @param index       The index of the Deadline task to update.
+     * @param newDeadline The new deadline for the task.
+     * @throws KaiMException If the index is out of bounds or the task is not a Deadline.
+     */
+    public void updateDeadlineTime(int index, String newDeadline) throws KaiMException {
+        if (index < 0 || index >= tasks.size() || !(tasks.get(index) instanceof Deadline)) {
+            throw new KaiMException("Invalid deadline task number.");
+        } (
+            (Deadline) tasks.get(index)).setDeadline(newDeadline);
+    }
+
+    /**
+     * Updates the start time of an Event task at the specified index.
+     *
+     * @param index        The index of the Event task to update.
+     * @param newStartTime The new start time for the event.
+     * @throws KaiMException If the index is out of bounds or the task is not an Event.
+     */
+    public void updateEventStartTime(int index, String newStartTime) throws KaiMException {
+        if (index < 0 || index >= tasks.size() || !(tasks.get(index) instanceof Event)) {
+            throw new KaiMException("Invalid event task number.");
+        } (
+            (Event) tasks.get(index)).setStartTime(newStartTime);
+    }
+
+    /**
+     * Updates the end time of an Event task at the specified index.
+     *
+     * @param index      The index of the Event task to update.
+     * @param newEndTime The new end time for the event.
+     * @throws KaiMException If the index is out of bounds or the task is not an Event.
+     */
+    public void updateEventEndTime(int index, String newEndTime) throws KaiMException {
+        if (index < 0 || index >= tasks.size() || !(tasks.get(index) instanceof Event)) {
+            throw new KaiMException("Invalid event task number.");
+        } (
+            (Event) tasks.get(index)).setEndTime(newEndTime);
+    }
+
+    /**
      * Returns all tasks in the task list.
      *
      * @return The list of tasks.
@@ -111,5 +168,47 @@ public class TaskList {
                                     .toLowerCase()
                                     .contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
-}
+    }
+    /**
+     * Finds tasks that match the given keyword in the description.
+     *
+     * @param index The keyword to search for in the task descriptions.
+     * @param field The keyword to search for in the task descriptions.
+     * @param newValue The keyword to search for in the task descriptions.
+     */
+    public void updateTask(int index, String field, String newValue) throws KaiMException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new KaiMException("Invalid task number.");
+        }
+
+        Task task = tasks.get(index);
+
+        if (task instanceof Todo todo) {
+            if (field.equals("name")) {
+                todo.setDescription(newValue);
+            }
+        } else if (task instanceof Deadline deadline) {
+            switch (field) {
+            case "name": deadline.setDescription(newValue);
+                break;
+            case "by": deadline.setDeadline(newValue);
+                 break;
+            default:
+                throw new KaiMException("Invalid field for deadline. Use 'name' or 'by'.");
+            }
+        } else if (task instanceof Event event) {
+            switch (field) {
+            case "name": event.setDescription(newValue);
+                break;
+            case "start": event.setStartTime(newValue);
+                break;
+            case "to": event.setEndTime(newValue);
+                break;
+            default:
+                throw new KaiMException("Invalid field for event. Use 'name', 'start', or 'to'.");
+            }
+        } else {
+            throw new KaiMException("Invalid field for this task type.");
+        }
+    }
 }
