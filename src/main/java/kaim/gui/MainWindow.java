@@ -35,6 +35,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the KaiM instance */
     public void setKaim(KaiM d) {
         kaiM = d;
+        showWelcomeMessage();
     }
 
     /**
@@ -50,5 +51,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dogImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Displays a welcome message when the application starts.
+     * This message introduces the application and asks the user for input.
+     */
+    public void showWelcomeMessage() {
+        String message = "Hello! I'm KaiM \n What can I do for you?";
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(message, dogImage)
+        );
     }
 }

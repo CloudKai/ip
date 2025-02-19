@@ -45,6 +45,10 @@ public class Task {
         return description;
     }
 
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
     /**
      * Loads the corresponding task string based on the string representation,
      * and creates an object for the task.

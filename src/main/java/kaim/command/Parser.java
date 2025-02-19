@@ -1,14 +1,13 @@
 package kaim.command;
+
+import java.util.ArrayList;
+
 import kaim.KaiMException;
 import kaim.task.Deadline;
 import kaim.task.Event;
 import kaim.task.Task;
 import kaim.task.TaskList;
 import kaim.task.Todo;
-
-import java.util.ArrayList;
-
-
 
 /**
  * This class handles parsing user input and executing the corresponding commands.
@@ -35,7 +34,7 @@ public class Parser {
      * @throws KaiMException If an error occurs while processing the command.
      */
     public String handleCommand(String command, TaskList tasks) throws KaiMException {
-        String[] parts = command.split(" ", 2);
+        String[] parts = command.split(" ", 4);
         String action = parts[0];
 
         switch (action) {
@@ -54,6 +53,12 @@ public class Parser {
             return deleteTask(parts, tasks);
         case "find":
             return findTask(parts, tasks);
+        case "update":
+            if (parts.length < 4) {
+                throw new KaiMException("Invalid update format. Usage: update <index> <field> <new value>");
+            }
+            tasks.updateTask(Integer.parseInt(parts[1]) - 1, parts[2], parts[3]);
+            return "Updated task " + Integer.parseInt(parts[1]) + " successfully.";
         default:
             throw new KaiMException("Unknown command.");
         }

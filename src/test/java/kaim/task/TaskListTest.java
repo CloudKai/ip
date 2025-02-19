@@ -1,8 +1,9 @@
 package kaim.task;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import kaim.KaiMException;
 
 public class TaskListTest {
@@ -19,8 +20,8 @@ public class TaskListTest {
     void addTask_validTask_success() {
         Task task = new Task("Throw trash");
         taskList.addTask(task);
-        assertEquals(2, taskList.size());
-        assertEquals(task, taskList.getAllTasks().get(1));
+        Assertions.assertEquals(2, taskList.size());
+        Assertions.assertEquals(task, taskList.getAllTasks().get(1));
     }
 
     @Test
@@ -28,14 +29,14 @@ public class TaskListTest {
         Task task = new Task("Throw trash");
         taskList.addTask(task);
         Task removedTask = taskList.removeTask(1);
-        assertEquals(task, removedTask);
-        assertEquals(1, taskList.size());
+        Assertions.assertEquals(task, removedTask);
+        Assertions.assertEquals(1, taskList.size());
     }
 
     @Test
     void getTask_validIndex() throws KaiMException {
         Task task = taskList.getTask(0);
-        assertEquals("[T][ ] Buy groceries", task.toString());
+        Assertions.assertEquals("[T][ ] Buy groceries", task.toString());
     }
 
 }

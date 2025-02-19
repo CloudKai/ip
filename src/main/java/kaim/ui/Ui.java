@@ -10,8 +10,8 @@ import java.io.PrintWriter;
  * This class handles the input and output operations between the application and the user.
  */
 public class Ui {
-    private BufferedReader br;
-    private PrintWriter pw;
+    private final BufferedReader br;
+    private final PrintWriter pw;
 
     /**
      * Initializes the user interface with necessary input and output streams.
