@@ -1,4 +1,4 @@
-package kaim.gui;
+package mochi.mochi;
 
 import java.io.IOException;
 
@@ -7,14 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import kaim.KaiM;
+import mochi.gui.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
-    private KaiM kaiM = new KaiM("data/KaiM.txt");
+    private final Mochi mochi = new Mochi("data/KaiM.txt");
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setKaim(kaiM); // inject the KaiM instance
+            fxmlLoader.<MainWindow>getController().setMochi(mochi); // inject the Mochi instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

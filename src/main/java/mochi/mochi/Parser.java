@@ -1,13 +1,13 @@
-package kaim.command;
+package mochi.mochi;
 
 import java.util.ArrayList;
 
-import kaim.KaiMException;
-import kaim.task.Deadline;
-import kaim.task.Event;
-import kaim.task.Task;
-import kaim.task.TaskList;
-import kaim.task.Todo;
+import mochi.exception.MochiException;
+import mochi.task.Deadline;
+import mochi.task.Event;
+import mochi.task.Task;
+import mochi.task.TaskList;
+import mochi.task.Todo;
 
 /**
  * This class handles parsing user input and executing the corresponding commands.
@@ -31,37 +31,24 @@ public class Parser {
      * @param command The full command entered by the user.
      * @param tasks   The current task list to modify.
      * @return The response message after handling the command.
-     * @throws KaiMException If an error occurs while processing the command.
+     * @throws MochiException If an error occurs while processing the command.
      */
-    public String handleCommand(String command, TaskList tasks) throws KaiMException {
-        String[] parts = command.split(" ", 4);
+    public String handleCommand(String command, TaskList tasks) throws MochiException {
+        String[] parts = command.split(" ", 2);
         String action = parts[0];
 
-        switch (action) {
-        case "list":
-            return listTasks(tasks);
-        case "todo":
-            return addTodo(parts, tasks);
-        case "deadline":
-            return addDeadline(parts, tasks);
-        case "event":
-            return addEvent(parts, tasks);
-        case "mark":
-        case "unmark":
-            return toggleTaskStatus(parts, tasks, action.equals("mark"));
-        case "delete":
-            return deleteTask(parts, tasks);
-        case "find":
-            return findTask(parts, tasks);
-        case "update":
-            if (parts.length < 4) {
-                throw new KaiMException("Invalid update format. Usage: update <index> <field> <new value>");
-            }
-            tasks.updateTask(Integer.parseInt(parts[1]) - 1, parts[2], parts[3]);
-            return "Updated task " + Integer.parseInt(parts[1]) + " successfully.";
-        default:
-            throw new KaiMException("Unknown command.");
-        }
+        return switch (action) {
+        case "hi" -> "Helloo my name is Mochi";
+        case "list" -> listTasks(tasks);
+        case "todo" -> addTodo(parts, tasks);
+        case "deadline" -> addDeadline(parts, tasks);
+        case "event" -> addEvent(parts, tasks);
+        case "mark", "unmark" -> toggleTaskStatus(parts, tasks, action.equals("mark"));
+        case "delete" -> deleteTask(parts, tasks);
+        case "find" -> findTask(parts, tasks);
+        case "update" -> updateTask(parts, tasks);
+        default -> throw new MochiException("Sorry I don't recognise this command.");
+        };
     }
 
     /**
@@ -87,11 +74,11 @@ public class Parser {
      * @param parts The command parts (description) for the todo task.
      * @param tasks The current task list to add the task to.
      * @return A response message indicating that the task has been added.
-     * @throws KaiMException If the description of the todo is empty.
+     * @throws MochiException If the description of the todo is empty.
      */
-    private String addTodo(String[] parts, TaskList tasks) throws KaiMException {
+    private String addTodo(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new KaiMException("The description of a todo cannot be empty.");
+            throw new MochiException("The description of a todo cannot be empty.");
         }
         Task task = new Todo(parts[1].trim());
         tasks.addTask(task);
@@ -104,12 +91,15 @@ public class Parser {
      * @param parts The command parts (description and deadline) for the task.
      * @param tasks The current task list to add the task to.
      * @return A response message indicating that the task has been added.
-     * @throws KaiMException If the deadline format is incorrect.
+     * @throws MochiException If the deadline format is incorrect.
      */
-    private String addDeadline(String[] parts, TaskList tasks) throws KaiMException {
+    private String addDeadline(String[] parts, TaskList tasks) throws MochiException {
+        if (parts.length < 2) {
+            throw new MochiException("Deadline format: deadline <task> /by <dd/MM/yyyy HHmm>");
+        }
         String[] details = parts[1].split("\\s*/by\\s*");
         if (details.length < 2) {
-            throw new KaiMException("Deadline format: deadline task /by dd/MM/yyy time");
+            throw new MochiException("Deadline format: deadline <task> /by <dd/MM/yyyy HHmm>");
         }
         Task task = new Deadline(details[0].trim(), details[1].trim());
         tasks.addTask(task);
@@ -122,12 +112,16 @@ public class Parser {
      * @param parts The command parts (description, from, and to times) for the event task.
      * @param tasks The current task list to add the task to.
      * @return A response message indicating that the task has been added.
-     * @throws KaiMException If the event format is incorrect.
+     * @throws MochiException If the event format is incorrect.
      */
-    private String addEvent(String[] parts, TaskList tasks) throws KaiMException {
-        String[] details = parts[1].split("/from|/to");
+    private String addEvent(String[] parts, TaskList tasks) throws MochiException {
+        if (parts.length < 2) {
+            throw new MochiException("Event format: event <task> /from <start> /to <end>");
+        }
+        String[] details = parts[1].split("\\s*/from\\s*|\\s*/to\\s*");
         if (details.length < 3) {
-            throw new KaiMException("Event format: event task /from start /to end");
+            throw new MochiException("Event format: event <task> /from <start> /to <end>\n"
+                                + "Example: event clean /from Monday /to Friday");
         }
         Task task = new Event(details[0].trim(), details[1].trim(), details[2].trim());
         tasks.addTask(task);
@@ -141,9 +135,9 @@ public class Parser {
      * @param tasks The current task list to modify.
      * @param mark  True to mark the task as done, false to mark it as not done.
      * @return A response message indicating the task status has been toggled.
-     * @throws KaiMException If the task index is invalid.
+     * @throws MochiException If the task index is invalid.
      */
-    private String toggleTaskStatus(String[] parts, TaskList tasks, boolean mark) throws KaiMException {
+    private String toggleTaskStatus(String[] parts, TaskList tasks, boolean mark) throws MochiException {
         int index = Integer.parseInt(parts[1]) - 1;
         tasks.markTask(index, mark);
         return mark ? "Marked as done: " + tasks.getTask(index) : "Marked as not done: " + tasks.getTask(index);
@@ -155,9 +149,9 @@ public class Parser {
      * @param parts The command parts (task number) to delete the task.
      * @param tasks The current task list to remove the task from.
      * @return A response message indicating the task has been deleted.
-     * @throws KaiMException If the task index is invalid.
+     * @throws MochiException If the task index is invalid.
      */
-    private String deleteTask(String[] parts, TaskList tasks) throws KaiMException {
+    private String deleteTask(String[] parts, TaskList tasks) throws MochiException {
         int index = Integer.parseInt(parts[1]) - 1;
         Task removed = tasks.removeTask(index);
         return "Deleted: " + removed;
@@ -169,11 +163,11 @@ public class Parser {
      * @param parts The command parts, where parts[1] is the keyword.
      * @param tasks The task list to search in.
      * @return A string listing the matching tasks.
-     * @throws KaiMException If the user doesn't provide a keyword.
+     * @throws MochiException If the user doesn't provide a keyword.
      */
-    private String findTask(String[] parts, TaskList tasks) throws KaiMException {
+    private String findTask(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new KaiMException("You must provide a keyword to search.");
+            throw new MochiException("You must provide a keyword to search.");
         }
         String keyword = parts[1].trim();
         ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
@@ -189,5 +183,24 @@ public class Parser {
         }
 
         return sb.toString();
+    }
+
+    private String updateTask(String[] parts, TaskList tasks) throws MochiException {
+        if (parts.length < 2) {
+            throw new MochiException("Invalid update format. Usage: update <index> <field> <new_value>\n"
+                    + "Example: update 1 name do assignment");
+        }
+        String[] updateParts = parts[1].split(" ", 3);
+        if (updateParts.length < 3) {
+            throw new MochiException("Invalid update format. Usage: update <index> <field> <new_value>\n"
+                    + "Example: update 1 name do assignment");
+        }
+
+        int index = Integer.parseInt(updateParts[0]) - 1;
+        String field = updateParts[1];
+        String newValue = updateParts[2];
+
+        tasks.updateTask(index, field, newValue);
+        return "Updated task " + (index + 1) + " successfully.";
     }
 }

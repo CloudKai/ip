@@ -48,13 +48,13 @@ test {
 }
 
 application {
-    mainClass.set("kaim.gui.Launcher")
+    mainClass.set("mochi.gui.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "kaiM"
+    archiveBaseName = "Mochi"
     archiveClassifier = null
-    archiveFileName = 'KaiM.jar'
+    archiveFileName = 'Mochi.jar'
 }
 
 run{

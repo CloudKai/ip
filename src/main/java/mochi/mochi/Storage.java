@@ -1,4 +1,4 @@
-package kaim.storage;
+package mochi.mochi;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,9 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import kaim.KaiMException;
-import kaim.task.Task;
-import kaim.task.TaskList;
+import mochi.exception.MochiException;
+import mochi.task.Task;
+import mochi.task.TaskList;
 
 /**
  * Handles loading and saving tasks to a file.
@@ -36,9 +36,9 @@ public class Storage {
      * If the file does not exist, it creates a new file and returns an empty list.
      *
      * @return A list of tasks loaded from the file.
-     * @throws KaiMException If there is an error reading the file.
+     * @throws MochiException If there is an error reading the file.
      */
-    public ArrayList<Task> loadTasks() throws KaiMException {
+    public ArrayList<Task> loadTasks() throws MochiException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             if (!Files.exists(Paths.get(filePath))) {
@@ -53,7 +53,7 @@ public class Storage {
             }
             br.close();
         } catch (IOException e) {
-            throw new KaiMException("Error reading tasks from file.");
+            throw new MochiException("Error reading tasks from file.");
         }
         return tasks;
     }
@@ -62,16 +62,16 @@ public class Storage {
      * Saves the current list of tasks to the storage file.
      *
      * @param tasks The TaskList containing tasks to be saved.
-     * @throws KaiMException If there is an error writing to the file.
+     * @throws MochiException If there is an error writing to the file.
      */
-    public void saveTasks(TaskList tasks) throws KaiMException {
+    public void saveTasks(TaskList tasks) throws MochiException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             for (Task task : tasks.getAllTasks()) {
                 bw.write(task.toString());
                 bw.newLine();
             }
         } catch (IOException e) {
-            throw new KaiMException("Error saving tasks to file.");
+            throw new MochiException("Error saving tasks to file.");
         }
     }
 }

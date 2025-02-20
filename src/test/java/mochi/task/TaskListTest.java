@@ -1,10 +1,10 @@
-package kaim.task;
+package mochi.task;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kaim.KaiMException;
+import mochi.exception.MochiException;
 
 public class TaskListTest {
     private TaskList taskList;
@@ -25,7 +25,7 @@ public class TaskListTest {
     }
 
     @Test
-    void removeTask_validIndex_success() throws KaiMException {
+    void removeTask_validIndex_success() throws MochiException {
         Task task = new Task("Throw trash");
         taskList.addTask(task);
         Task removedTask = taskList.removeTask(1);
@@ -34,7 +34,7 @@ public class TaskListTest {
     }
 
     @Test
-    void getTask_validIndex() throws KaiMException {
+    void getTask_validIndex() throws MochiException {
         Task task = taskList.getTask(0);
         Assertions.assertEquals("[T][ ] Buy groceries", task.toString());
     }

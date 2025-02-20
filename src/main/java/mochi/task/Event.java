@@ -1,4 +1,4 @@
-package kaim.task;
+package mochi.task;
 
 /**
  * Represents an event task with a start and end date/time.
@@ -18,6 +18,7 @@ public class Event extends Task {
      */
     public Event(String description, String start, String to) {
         super(description);
+        assert description != null && !description.isEmpty() : "Description cannot be null or empty";
         this.startDateTime = start;
         this.endDateTime = to;
     }

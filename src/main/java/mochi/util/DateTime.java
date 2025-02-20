@@ -1,9 +1,11 @@
-package kaim.command;
+package mochi.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import mochi.exception.MochiException;
 
 /**
  * Utility class for parsing and formatting dates and times in multiple formats.
@@ -14,7 +16,10 @@ public class DateTime {
     private static final List<DateTimeFormatter> INPUT_FORMATS = List.of(
         DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // 2023-12-31 2359
         DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // 31/12/2023 2359
-        DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma") // Dec 31 2023, 11:59PM
+        DateTimeFormatter.ofPattern("d-M-yyyy HHmm"), // 31-12-2023 2359
+        DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"), // 31 Dec 2023 2359
+        DateTimeFormatter.ofPattern("dd MMMM yyyy HHmm"), // 31 December 2023 2359
+        DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma")
     );
 
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
@@ -27,7 +32,7 @@ public class DateTime {
      * @return The corresponding LocalDateTime object.
      * @throws IllegalArgumentException If the string does not match any of the supported formats.
      */
-    public static LocalDateTime parseDateTime(String dateTimeStr) {
+    public static LocalDateTime parseDateTime(String dateTimeStr) throws MochiException {
         for (DateTimeFormatter formatter : INPUT_FORMATS) {
             try {
                 return LocalDateTime.parse(dateTimeStr, formatter);
@@ -35,7 +40,7 @@ public class DateTime {
                 // Try next format
             }
         }
-        throw new IllegalArgumentException("Invalid date format");
+        throw new MochiException("I can't recognise this date format");
     }
 
     /**

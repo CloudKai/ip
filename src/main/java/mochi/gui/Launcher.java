@@ -1,6 +1,7 @@
-package kaim.gui;
+package mochi.gui;
 
 import javafx.application.Application;
+import mochi.mochi.Main;
 
 /**
  * A launcher class to workaround classpath issues.

@@ -1,7 +1,7 @@
-package kaim.task;
+package mochi.task;
 
 /**
- * Represents a to-do task in the KaiM application.
+ * Represents a to-do task in the Mochi application.
  * A to-do task is a basic task that only has a description and no date/time.
  */
 public class Todo extends Task {
@@ -13,6 +13,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        assert description != null && !description.isEmpty() : "Description cannot be null or empty";
     }
 
     @Override

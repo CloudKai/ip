@@ -1,8 +1,9 @@
-package kaim.task;
+package mochi.task;
 
 import java.time.LocalDateTime;
 
-import kaim.command.DateTime;
+import mochi.exception.MochiException;
+import mochi.util.DateTime;
 
 /**
  * Represents a task with a deadline.
@@ -17,13 +18,13 @@ public class Deadline extends Task {
      * @param description The description of the deadline task.
      * @param by The due date/time in string format.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws MochiException {
         super(description);
         assert description != null && !description.isEmpty() : "Description cannot be null or empty";
         this.deadlineDateTime = DateTime.parseDateTime(by);
     }
 
-    public void setDeadline(String newDeadline) {
+    public void setDeadline(String newDeadline) throws MochiException {
         this.deadlineDateTime = DateTime.parseDateTime(newDeadline);
     }
 

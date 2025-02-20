@@ -1,5 +1,7 @@
-package kaim.gui;
+package mochi.gui;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,7 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import kaim.KaiM;
+import javafx.util.Duration;
+import mochi.mochi.Mochi;
 
 /**
  * Controller for the main GUI.
@@ -22,20 +25,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private KaiM kaiM;
+    private Mochi mochi;
 
-    private Image dogImage = new Image(this.getClass().getResourceAsStream("/images/Dog.jpg"));
-    private Image catImage = new Image(this.getClass().getResourceAsStream("/images/Cat.jpg"));
+    private Image bearImage = new Image(this.getClass().getResourceAsStream("/images/bear.jpg"));
+    private Image mochiImage = new Image(this.getClass().getResourceAsStream("/images/mochi.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showMessage("Hello! I'm Mochi\nWhat can I do for you?");
     }
 
-    /** Injects the KaiM instance */
-    public void setKaim(KaiM d) {
-        kaiM = d;
-        showWelcomeMessage();
+    /** Injects the Mochi instance */
+    public void setMochi(Mochi d) {
+        mochi = d;
     }
 
     /**
@@ -44,12 +47,17 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = kaiM.getResponse(input);
+        String input = userInput.getText().trim();
+        String response = mochi.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, catImage),
-                DialogBox.getDukeDialog(response, dogImage)
+                DialogBox.getUserDialog(input, bearImage),
+                DialogBox.getMochiDialog(response, mochiImage)
         );
+        if (response.equals("Bye. Hope to see you again soon!")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
         userInput.clear();
     }
 
@@ -57,10 +65,9 @@ public class MainWindow extends AnchorPane {
      * Displays a welcome message when the application starts.
      * This message introduces the application and asks the user for input.
      */
-    public void showWelcomeMessage() {
-        String message = "Hello! I'm KaiM \n What can I do for you?";
-        dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(message, dogImage)
+    public void showMessage(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getMochiDialog(message, mochiImage)
         );
     }
 }

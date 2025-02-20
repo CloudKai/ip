@@ -1,4 +1,4 @@
-package kaim.task;
+package mochi.task;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
