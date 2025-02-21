@@ -17,12 +17,12 @@ hi
 
 Expected Output:
 ```
-Helloo my name is Mochi"
+Helloo my name is Mochi
 ```
 
 ## Adding deadlines
 
-Add a new deadline task to be completed by a specific date and time.
+Add a new deadline task to be completed by a specific date time.
 
 Usage: `deadline <task> /by <yyyy-mm-dd HHmm>`
 
@@ -40,7 +40,7 @@ Friend you have X tasks in the list.
 
 ## Adding event
 
-Add a new event task with a start and end time.
+Add a new event task with a start and end date time.
 
 Usage: `event <task> /from <start> /to <end>`
 
@@ -58,7 +58,7 @@ Friend you have X tasks in the list.
 
 ## Adding todo
 
-// Describe the action and its outcome.
+Add a new todo task.
 
 Usage: `todo Finish Ip`
 
@@ -127,7 +127,7 @@ Here are the matching tasks in your list:
 
 ## Delete task
 
-Find tasks that match a keyword.
+Delete an existing task.
 
 Usage: `delete <task_index>`
 
@@ -141,12 +141,6 @@ Expected Output:
 Task removed:
 1. [T][ ] Buy groceries
 Friend you have X tasks in the list.
-```
-
-Expected Output:
-```
-Here are the matching tasks in your list:
-1. [T][ ] Buy groceries
 ```
 
 ## Update task
@@ -170,8 +164,6 @@ Helped you update task:
 
 View all tasks in the list.
 
-// Give examples of usage
-
 Usage: `list`
 
 Example:
@@ -184,4 +176,21 @@ Expected Output:
 Friend here is your task list:
 1. [T][ ] Buy vegetables
 2. [D][ ] Finish iP (by: Feb 21 2025 11:59pm)
+```
+
+## Bye
+
+Close the application.
+
+Usage: `bye`
+
+Example:
+```
+bye
+```
+
+Expected Output:
+```
+Bye. Hope to see you again soon!
+Mochi will miss you!!!
 ```
