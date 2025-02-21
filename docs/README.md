@@ -190,8 +190,6 @@ Friend here is your task list:
 
 Close the application.
 
-// Give examples of usage
-
 Usage: `bye`
 
 Example:
