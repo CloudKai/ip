@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import mochi.gui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Mochi using FXML.
  */
 public class Main extends Application {
 

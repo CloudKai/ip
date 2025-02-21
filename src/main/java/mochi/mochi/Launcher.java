@@ -1,7 +1,6 @@
-package mochi.gui;
+package mochi.mochi;
 
 import javafx.application.Application;
-import mochi.mochi.Main;
 
 /**
  * A launcher class to workaround classpath issues.
