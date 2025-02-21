@@ -2,139 +2,186 @@
 
 ![GUI](./Ui.png)
 
-I am Mochi, your assistance for recording daily tasks.
+I am Mochi, your assistant for recording daily tasks.
 
 ## Hi
 
 Say hi to Mochi and he will reply back
 
-Example: `hi`
+Usage: `hi`
 
-Mochi will say "Hellooo" back
-
+Example:
 ```
-Hellooo
+hi
+```
+
+Expected Output:
+```
+Helloo my name is Mochi"
 ```
 
 ## Adding deadlines
 
-Add a new deadline task to be completed by
+Add a new deadline task to be completed by a specific date and time.
 
-Usage: `deadline <description> /by <YYYY-MM-DD HHmm>`
+Usage: `deadline <task> /by <dd-mm-yyyy HHmm>`
 
-Examples:
+Example:
 ```
-deadline
+deadline Finish iP /by 21-02-2025 2359
+```
+
+Expected Output:
+```
+Oooo Task added:
+[D][ ] Finish iP (by: Feb 21 2025 11:59pm)
+Friend you have X tasks in the list.
 ```
 
 ## Adding event
 
-// Describe the action and its outcome.
+Add a new event task with a start and end time.
 
-// Give examples of usage
+Usage: `event <task> /from <start> /to <end>`
 
-Example: `event (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+event Finish iP /from 20-01-2025 0000 /to 21-02-2025 2359 
+```
+
+Expected Output:
+```
+Oooo Task added:
+[E][ ] Finish iP (from: Jan 20 2025, 12:00am, to: Feb 21 2025, 11:59pm)
+Friend you have X tasks in the list.
 ```
 
 ## Adding todo
 
 // Describe the action and its outcome.
 
-// Give examples of usage
+Usage: `todo Finish Ip`
 
-Example: `todo (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+todo Finish iP
+```
+
+Expected Output:
+```
+Oooo Task added:
+[T][ ] Finish iP
+Friend you have X tasks in the list.
 ```
 
 ## Mark task
 
-// Describe the action and its outcome.
+Mark a task as completed.
 
-// Give examples of usage
+Usage: `mark <task_index>`
 
-Example: `mark (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+mark 1
+```
+
+Expected Output:
+```
+Friend! I have marked this as done:
+[T][X] Buy groceries
 ```
 
 ## Unmark task
 
-// Describe the action and its outcome.
+Mark a task as not completed.
 
-// Give examples of usage
+Usage: `unmark <task_index>`
 
-Example: `unmark (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+unmark 1
+```
+
+Expected Output:
+```
+Friend! I have unmarked this as not done:
+[T][] Buy groceries
 ```
 
 ## Find task
 
-// Describe the action and its outcome.
+Find tasks that match a keyword.
 
-// Give examples of usage
+Usage: `Find <keyword>`
 
-Example: `find (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+find groceries
+```
+
+Expected Output:
+```
+Here are the matching tasks in your list:
+1. [T][ ] Buy groceries
 ```
 
 ## Delete task
 
-// Describe the action and its outcome.
+Find tasks that match a keyword.
 
-// Give examples of usage
+Usage: `delete <task_index>`
 
-Example: `delete (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+delete 1
+```
+
+Expected Output:
+```
+Task removed:
+1. [T][ ] Buy groceries
+Friend you have X tasks in the list.
+```
+
+Expected Output:
+```
+Here are the matching tasks in your list:
+1. [T][ ] Buy groceries
 ```
 
 ## Update task
 
-// Describe the action and its outcome.
+Modify an existing task.
 
-// Give examples of usage
+Usage: `update <task_index> <field> <new_value>`
 
-Example: `update (optional arguments)`
-
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+update 1 task Buy vegetables
+```
+
+Expected Output:
+```
+Helped you update task:
+1. [T][ ] Buy vegetables
 ```
 
 ## List
 
-// Describe the action and its outcome.
+View all tasks in the list.
 
 // Give examples of usage
 
-Example: `list`
+Usage: `list`
 
-// A description of the expected outcome goes here
-
+Example:
 ```
-expected output
+list
+```
+
+Expected Output:
+```
+Friend here is your task list:
+1. [T][ ] Buy vegetables
+2. [D][ ] Finish iP (by: 25-12-2025 23:59)
 ```

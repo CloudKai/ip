@@ -9,6 +9,7 @@ import mochi.task.TaskList;
  * The class loads tasks from a saved file, executes user commands, and saves tasks back to the file.
  */
 public class Mochi {
+    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!\nMochi will miss you!!!";
     private final Storage storage;
     private TaskList tasks;
 
@@ -35,7 +36,7 @@ public class Mochi {
         Parser parser = new Parser();
         try {
             if (parser.isExitCommand(input)) {
-                return "Bye. Hope to see you again soon!";
+                return BYE_MESSAGE;
             }
             String response = parser.handleCommand(input, tasks);
             storage.saveTasks(tasks);

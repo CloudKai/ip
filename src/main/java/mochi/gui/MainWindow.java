@@ -49,15 +49,18 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText().trim();
         String response = mochi.getResponse(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, bearImage),
                 DialogBox.getMochiDialog(response, mochiImage)
         );
-        if (response.equals("Bye. Hope to see you again soon!")) {
+
+        if (response.equals(Mochi.BYE_MESSAGE)) {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
+
         userInput.clear();
     }
 

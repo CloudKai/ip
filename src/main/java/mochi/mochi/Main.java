@@ -14,7 +14,7 @@ import mochi.gui.MainWindow;
  */
 public class Main extends Application {
 
-    private final Mochi mochi = new Mochi("data/KaiM.txt");
+    private final Mochi mochi = new Mochi("data/Mochi.txt");
 
     @Override
     public void start(Stage stage) {

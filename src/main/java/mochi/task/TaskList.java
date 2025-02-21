@@ -47,7 +47,7 @@ public class TaskList {
      */
     public Task removeTask(int index) throws MochiException {
         if (index < 0 || index >= tasks.size()) {
-            throw new MochiException("Invalid task number.");
+            throw new MochiException("Huh I can't find this task number.");
         }
         return tasks.remove(index);
     }
@@ -128,30 +128,30 @@ public class TaskList {
         Task task = tasks.get(index);
 
         if (task instanceof Todo todo) {
-            if (field.equals("name")) {
+            if (field.equals("task")) {
                 todo.setDescription(newValue);
             } else {
-                throw new MochiException("Invalid <field> for todo. Use 'name'");
+                throw new MochiException("Invalid <field> for todo. Use 'task'");
             }
         } else if (task instanceof Deadline deadline) {
             switch (field) {
-            case "name": deadline.setDescription(newValue);
+            case "task": deadline.setDescription(newValue);
                 break;
             case "by": deadline.setDeadline(newValue);
                  break;
             default:
-                throw new MochiException("Invalid <field> for deadline. Use 'name' or 'by'.");
+                throw new MochiException("Invalid <field> for deadline. Use 'task' or 'by'.");
             }
         } else if (task instanceof Event event) {
             switch (field) {
-            case "name": event.setDescription(newValue);
+            case "task": event.setDescription(newValue);
                 break;
             case "from": event.setStartTime(newValue);
                 break;
             case "to": event.setEndTime(newValue);
                 break;
             default:
-                throw new MochiException("Invalid <field> for event. Use 'name', 'from, or 'to'.");
+                throw new MochiException("Invalid <field> for event. Use 'task', 'from, or 'to'.");
             }
         } else {
             throw new MochiException("Invalid <field> for this task type.");

@@ -108,7 +108,7 @@ public class Task {
         return deadline;
     }
 
-    private static Event createEventTask(String taskString, boolean isDone) {
+    private static Event createEventTask(String taskString, boolean isDone) throws MochiException {
         String description = taskString.substring(6).trim();
 
         // Extract (from: Dec 02 2019, 6:00pm to: Dec 03 2019, 8:00am)

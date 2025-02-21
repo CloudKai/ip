@@ -48,7 +48,7 @@ test {
 }
 
 application {
-    mainClass.set("mochi.gui.Launcher")
+    mainClass.set("mochi.mochi.Launcher")
 }
 
 shadowJar {

@@ -17,8 +17,6 @@ public class DateTime {
         DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // 2023-12-31 2359
         DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // 31/12/2023 2359
         DateTimeFormatter.ofPattern("d-M-yyyy HHmm"), // 31-12-2023 2359
-        DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"), // 31 Dec 2023 2359
-        DateTimeFormatter.ofPattern("dd MMMM yyyy HHmm"), // 31 December 2023 2359
         DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma")
     );
 

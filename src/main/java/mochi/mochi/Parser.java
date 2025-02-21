@@ -61,11 +61,13 @@ public class Parser {
         if (tasks.size() == 0) {
             return "Your task list is empty!";
         }
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             sb.append((i + 1)).append(". ").append(tasks.getAllTasks().get(i)).append("\n");
         }
-        return sb.toString();
+
+        return "Friend here is your task list:\n" + sb.toString();
     }
 
     /**
@@ -78,11 +80,13 @@ public class Parser {
      */
     private String addTodo(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new MochiException("The description of a todo cannot be empty.");
+            throw new MochiException("Huh I do not get this Todo format.\n"
+                    + "Usage: todo <task>");
         }
+
         Task task = new Todo(parts[1].trim());
         tasks.addTask(task);
-        return "Added: " + task;
+        return "Oooo Task added:\n" + task + "\nFriend you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -95,15 +99,19 @@ public class Parser {
      */
     private String addDeadline(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new MochiException("Deadline format: deadline <task> /by <dd/MM/yyyy HHmm>");
+            throw new MochiException("Huh I do not get this Deadline format.\n"
+                    + "Usage: deadline <task> /by <dd-mm-yyyy HHmm>");
         }
+
         String[] details = parts[1].split("\\s*/by\\s*");
         if (details.length < 2) {
-            throw new MochiException("Deadline format: deadline <task> /by <dd/MM/yyyy HHmm>");
+            throw new MochiException("Huh I do not get this Deadline format.\n"
+                    + "Usage: deadline <task> /by <dd-mm-yyyy HHmm>");
         }
+
         Task task = new Deadline(details[0].trim(), details[1].trim());
         tasks.addTask(task);
-        return "Added: " + task;
+        return "Oooo Task added:\n" + task + "\nFriend you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -116,16 +124,21 @@ public class Parser {
      */
     private String addEvent(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new MochiException("Event format: event <task> /from <start> /to <end>");
+            throw new MochiException("Huh I do not get this Event format.\n"
+                    + "Usage: event <task> /from <start> /to <end>.\n"
+                    + "The <start> and <end> format is <dd-mm-yyyy HHmm>");
         }
+
         String[] details = parts[1].split("\\s*/from\\s*|\\s*/to\\s*");
         if (details.length < 3) {
-            throw new MochiException("Event format: event <task> /from <start> /to <end>\n"
-                                + "Example: event clean /from Monday /to Friday");
+            throw new MochiException("Huh I do not get this Event format.\n"
+                    + "Usage: event <task> /from <start> /to <end>.\n"
+                    + "The <start> and <end> format is <dd-mm-yyyy HHmm>");
         }
+
         Task task = new Event(details[0].trim(), details[1].trim(), details[2].trim());
         tasks.addTask(task);
-        return "Added: " + task;
+        return "Oooo Task added:\n" + task + "\nFriend you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -138,9 +151,21 @@ public class Parser {
      * @throws MochiException If the task index is invalid.
      */
     private String toggleTaskStatus(String[] parts, TaskList tasks, boolean mark) throws MochiException {
+        if (parts.length < 2) {
+            throw new MochiException("Friend, you must provide a task number to mark/unmark.");
+        }
+
         int index = Integer.parseInt(parts[1]) - 1;
+        if (index < 0 || index >= tasks.size()) {
+            throw new MochiException("Friend, this task number does not exist.");
+        }
+
         tasks.markTask(index, mark);
-        return mark ? "Marked as done: " + tasks.getTask(index) : "Marked as not done: " + tasks.getTask(index);
+        if (mark) {
+            return "Friend! I have marked this as done:\n" + tasks.getTask(index);
+        } else {
+            return "Friend! I have unmarked this as not done:\n" + tasks.getTask(index);
+        }
     }
 
     /**
@@ -152,9 +177,14 @@ public class Parser {
      * @throws MochiException If the task index is invalid.
      */
     private String deleteTask(String[] parts, TaskList tasks) throws MochiException {
+        if (parts.length < 2) {
+            throw new MochiException("Friend, you must provide an index to delete.");
+        }
+
         int index = Integer.parseInt(parts[1]) - 1;
         Task removed = tasks.removeTask(index);
-        return "Deleted: " + removed;
+        return "Task removed:\n" + index + ". " + removed + "\nFriend you have " + tasks.size()
+                + " tasks in the list.";
     }
 
     /**
@@ -167,13 +197,13 @@ public class Parser {
      */
     private String findTask(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new MochiException("You must provide a keyword to search.");
+            throw new MochiException("Friend, you must provide a keyword to search.");
         }
+
         String keyword = parts[1].trim();
         ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
-
         if (matchingTasks.isEmpty()) {
-            return "No tasks found matching: " + keyword;
+            return "Friend no tasks found matching: " + keyword;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -187,13 +217,14 @@ public class Parser {
 
     private String updateTask(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
-            throw new MochiException("Invalid update format. Usage: update <index> <field> <new_value>\n"
-                    + "Example: update 1 name do assignment");
+            throw new MochiException("Huh I do not get this Update format.\n"
+                    + "Usage: update <index> <field> <new_value>");
         }
+
         String[] updateParts = parts[1].split(" ", 3);
         if (updateParts.length < 3) {
-            throw new MochiException("Invalid update format. Usage: update <index> <field> <new_value>\n"
-                    + "Example: update 1 name do assignment");
+            throw new MochiException("Huh I do not get this Update format.\n"
+                    + "Usage: update <index> <field> <new_value>");
         }
 
         int index = Integer.parseInt(updateParts[0]) - 1;
@@ -201,6 +232,6 @@ public class Parser {
         String newValue = updateParts[2];
 
         tasks.updateTask(index, field, newValue);
-        return "Updated task " + (index + 1) + " successfully.";
+        return "Helped you update task:\n" + (index + 1) + ". " + tasks.getTask(index);
     }
 }

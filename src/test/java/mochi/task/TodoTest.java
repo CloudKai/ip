@@ -25,4 +25,25 @@ public class TodoTest {
         todo.markAsNotDone();
         Assertions.assertEquals("[T][ ] Read a book", todo.toString());
     }
+
+    @Test
+    void createTodo_nullDescription_throwsAssertionError() {
+        Assertions.assertThrows(AssertionError.class, () -> {
+            new Todo(null);
+        });
+    }
+
+    @Test
+    void createTodo_emptyDescription_throwsAssertionError() {
+        Assertions.assertThrows(AssertionError.class, () -> {
+            new Todo("");
+        });
+    }
+
+    @Test
+    void getDescription_correctValue() {
+        Todo todo = new Todo("Finish homework");
+        Assertions.assertEquals("Finish homework", todo.getDescription());
+    }
+
 }
