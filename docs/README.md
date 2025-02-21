@@ -185,3 +185,22 @@ Friend here is your task list:
 1. [T][ ] Buy vegetables
 2. [D][ ] Finish iP (by: 25-12-2025 23:59)
 ```
+
+## Bye
+
+Close the application.
+
+// Give examples of usage
+
+Usage: `bye`
+
+Example:
+```
+bye
+```
+
+Expected Output:
+```
+Bye. Hope to see you again soon!
+Mochi will miss you!!!
+```
