@@ -17,7 +17,7 @@ hi
 
 Expected Output:
 ```
-Helloo my name is Mochi"
+Helloo my name is Mochi
 ```
 
 ## Adding deadlines
