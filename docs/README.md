@@ -24,11 +24,11 @@ Helloo my name is Mochi"
 
 Add a new deadline task to be completed by a specific date and time.
 
-Usage: `deadline <task> /by <dd-mm-yyyy HHmm>`
+Usage: `deadline <task> /by <yyyy-mm-dd HHmm>`
 
 Example:
 ```
-deadline Finish iP /by 21-02-2025 2359
+deadline Finish iP /by 2025-02-21 2359
 ```
 
 Expected Output:
@@ -46,7 +46,7 @@ Usage: `event <task> /from <start> /to <end>`
 
 Example:
 ```
-event Finish iP /from 20-01-2025 0000 /to 21-02-2025 2359 
+event Finish iP /from 2025-01-20 0000 /to 2025-02-21 2359 
 ```
 
 Expected Output:
@@ -183,5 +183,5 @@ Expected Output:
 ```
 Friend here is your task list:
 1. [T][ ] Buy vegetables
-2. [D][ ] Finish iP (by: 25-12-2025 23:59)
+2. [D][ ] Finish iP (by: Feb 21 2025 11:59pm)
 ```

@@ -29,11 +29,19 @@ public class Event extends Task {
     }
 
     public void setStartTime(String newStartTime) throws MochiException {
-        this.startDateTime = DateTime.parseDateTime(newStartTime);
+        try {
+            this.startDateTime = DateTime.parseDateTime(newStartTime);
+        } catch (MochiException e) {
+            throw new MochiException("Huh please use this date-time format: yyyy-mm-dd HHmm");
+        }
     }
 
     public void setEndTime(String newEndTime) throws MochiException {
-        this.endDateTime = DateTime.parseDateTime(newEndTime);
+        try {
+            this.endDateTime = DateTime.parseDateTime(newEndTime);
+        } catch (MochiException e) {
+            throw new MochiException("Huh please use this date-time format: yyyy-mm-dd HHmm");
+        }
     }
 
     @Override

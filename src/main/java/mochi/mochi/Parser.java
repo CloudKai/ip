@@ -100,13 +100,13 @@ public class Parser {
     private String addDeadline(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
             throw new MochiException("Huh I do not get this Deadline format.\n"
-                    + "Usage: deadline <task> /by <dd-mm-yyyy HHmm>");
+                    + "Usage: deadline <task> /by <yyyy-mm-dd HHmm>");
         }
 
         String[] details = parts[1].split("\\s*/by\\s*");
         if (details.length < 2) {
             throw new MochiException("Huh I do not get this Deadline format.\n"
-                    + "Usage: deadline <task> /by <dd-mm-yyyy HHmm>");
+                    + "Usage: deadline <task> /by <yyyy-mm-dd HHmm>");
         }
 
         Task task = new Deadline(details[0].trim(), details[1].trim());
@@ -126,14 +126,14 @@ public class Parser {
         if (parts.length < 2) {
             throw new MochiException("Huh I do not get this Event format.\n"
                     + "Usage: event <task> /from <start> /to <end>.\n"
-                    + "The <start> and <end> format is <dd-mm-yyyy HHmm>");
+                    + "Ref: The <start> and <end> format is <yyyy-mm-dd HHmm>");
         }
 
         String[] details = parts[1].split("\\s*/from\\s*|\\s*/to\\s*");
         if (details.length < 3) {
             throw new MochiException("Huh I do not get this Event format.\n"
                     + "Usage: event <task> /from <start> /to <end>.\n"
-                    + "The <start> and <end> format is <dd-mm-yyyy HHmm>");
+                    + "Ref: The <start> and <end> format is <yyyy-mm-dd HHmm>");
         }
 
         Task task = new Event(details[0].trim(), details[1].trim(), details[2].trim());
@@ -218,13 +218,15 @@ public class Parser {
     private String updateTask(String[] parts, TaskList tasks) throws MochiException {
         if (parts.length < 2) {
             throw new MochiException("Huh I do not get this Update format.\n"
-                    + "Usage: update <index> <field> <new_value>");
+                    + "Usage: update <index> <field> <new_value>\n"
+                    + "Ref: <field> = task/by/from/to");
         }
 
         String[] updateParts = parts[1].split(" ", 3);
         if (updateParts.length < 3) {
             throw new MochiException("Huh I do not get this Update format.\n"
-                    + "Usage: update <index> <field> <new_value>");
+                    + "Usage: update <index> <field> <new_value>\n"
+                    + "Ref: <field> = task/by/from/to");
         }
 
         int index = Integer.parseInt(updateParts[0]) - 1;

@@ -25,7 +25,11 @@ public class Deadline extends Task {
     }
 
     public void setDeadline(String newDeadline) throws MochiException {
-        this.deadlineDateTime = DateTime.parseDateTime(newDeadline);
+        try {
+            this.deadlineDateTime = DateTime.parseDateTime(newDeadline);
+        } catch (MochiException e) {
+            throw new MochiException("Huh please use this date-time format: yyyy-mm-dd HHmm");
+        }
     }
 
     @Override
