@@ -26,7 +26,7 @@ public class Parser {
     public static final String UPDATE_ERROR_MESSAGE = "Huh I do not get this Update format.\n"
             + "Usage: update <index> <field> <new_value>\n"
             + "\n"
-            + "Ref: <field> = task by from to";
+            + "Ref: <field> = task  by   from   to";
     public static final String TASK_NOT_NUMBER_ERROR = "Huh the task_index must be a number";
 
     /**
