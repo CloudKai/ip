@@ -3,7 +3,7 @@ package mochi.task;
 import java.time.LocalDateTime;
 
 import mochi.exception.MochiException;
-import mochi.util.DateTime;
+import mochi.util.DateTimeUtil;
 
 /**
  * Represents an event task with a start and end date/time.
@@ -24,13 +24,13 @@ public class Event extends Task {
     public Event(String description, String start, String to) throws MochiException {
         super(description);
         assert description != null && !description.isEmpty() : "Description cannot be null or empty";
-        this.startDateTime = DateTime.parseDateTime(start);
-        this.endDateTime = DateTime.parseDateTime(to);
+        this.startDateTime = DateTimeUtil.parseDateTime(start);
+        this.endDateTime = DateTimeUtil.parseDateTime(to);
     }
 
     public void setStartTime(String newStartTime) throws MochiException {
         try {
-            this.startDateTime = DateTime.parseDateTime(newStartTime);
+            this.startDateTime = DateTimeUtil.parseDateTime(newStartTime);
         } catch (MochiException e) {
             throw new MochiException("Huh please use this date-time format: yyyy-mm-dd HHmm");
         }
@@ -38,7 +38,7 @@ public class Event extends Task {
 
     public void setEndTime(String newEndTime) throws MochiException {
         try {
-            this.endDateTime = DateTime.parseDateTime(newEndTime);
+            this.endDateTime = DateTimeUtil.parseDateTime(newEndTime);
         } catch (MochiException e) {
             throw new MochiException("Huh please use this date-time format: yyyy-mm-dd HHmm");
         }
@@ -46,7 +46,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTime.formatDateTime(startDateTime)
-            + ", to: " + DateTime.formatDateTime(endDateTime) + ")";
+        return "[E]" + super.toString() + " (from: " + DateTimeUtil.formatDateTime(startDateTime)
+            + ", to: " + DateTimeUtil.formatDateTime(endDateTime) + ")";
     }
 }

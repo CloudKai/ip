@@ -3,7 +3,7 @@ package mochi.task;
 import java.time.LocalDateTime;
 
 import mochi.exception.MochiException;
-import mochi.util.DateTime;
+import mochi.util.DateTimeUtil;
 
 /**
  * Represents a task with a deadline.
@@ -21,12 +21,12 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws MochiException {
         super(description);
         assert description != null && !description.isEmpty() : "Description cannot be null or empty";
-        this.deadlineDateTime = DateTime.parseDateTime(by);
+        this.deadlineDateTime = DateTimeUtil.parseDateTime(by);
     }
 
     public void setDeadline(String newDeadline) throws MochiException {
         try {
-            this.deadlineDateTime = DateTime.parseDateTime(newDeadline);
+            this.deadlineDateTime = DateTimeUtil.parseDateTime(newDeadline);
         } catch (MochiException e) {
             throw new MochiException("Huh please use this date-time format: yyyy-mm-dd HHmm");
         }
@@ -34,6 +34,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTime.formatDateTime(deadlineDateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeUtil.formatDateTime(deadlineDateTime) + ")";
     }
 }

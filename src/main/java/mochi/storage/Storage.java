@@ -1,4 +1,4 @@
-package mochi.mochi;
+package mochi.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

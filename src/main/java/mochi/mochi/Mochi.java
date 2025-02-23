@@ -1,6 +1,7 @@
 package mochi.mochi;
 
 import mochi.exception.MochiException;
+import mochi.storage.Storage;
 import mochi.task.TaskList;
 
 /**

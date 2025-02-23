@@ -12,7 +12,7 @@ import mochi.exception.MochiException;
  * It provides methods to parse a string into a LocalDateTime object and
  * format a LocalDateTime object into a (MM dd yyyy) string.
  */
-public class DateTime {
+public class DateTimeUtil {
     private static final List<DateTimeFormatter> INPUT_FORMATS = List.of(
         DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // 2023-12-31 2359
         DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // 31/12/2023 2359
@@ -38,7 +38,7 @@ public class DateTime {
                 // Try next format
             }
         }
-        throw new MochiException("I can't recognise this date format");
+        throw new MochiException("I can't recognise this date format..\nPlease use (yyyy-mm-dd HHmm)");
     }
 
     /**
